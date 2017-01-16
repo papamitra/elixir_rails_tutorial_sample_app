@@ -10,4 +10,9 @@ defmodule SampleApp.StaticPagesControllerTest do
     conn = get conn, static_pages_path(conn, :help)
     assert html_response(conn, 200)
   end
+
+  test "should get about", %{conn: conn} do
+    conn = get conn, static_pages_path(conn, :about)
+    assert html_response(conn, 200)
+  end
 end
