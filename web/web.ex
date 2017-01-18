@@ -51,6 +51,7 @@ defmodule SampleApp.Web do
 
       import SampleApp.Router.Helpers
       import SampleApp.ErrorHelpers
+      import SampleApp.ApplicationHelpers
       import SampleApp.Gettext
     end
   end

@@ -9,12 +9,12 @@ defmodule SampleApp.StaticPagesControllerTest do
 
   test "should get root" do
     conn = get build_conn(), "/"
-    assert "Home | #{@base_title}" == get_title(conn)
+    assert "#{@base_title}" == get_title(conn)
   end
 
   test "should get home", %{conn: conn} do
     conn = get conn, static_pages_path(conn, :home)
-    assert "Home | #{@base_title}" == get_title(conn)
+    assert "#{@base_title}" == get_title(conn)
   end
 
   test "should get help", %{conn: conn} do
