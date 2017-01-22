@@ -3,6 +3,7 @@
 <html>
   <head>
     <title><%= full_title(@title) %></title>
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
     <!--[if lt IE 9]>
       <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js">
       </script>
@@ -23,6 +24,7 @@
     </header>
     <div class="container">
       <%= render @view_module, @view_template, assigns %>
+      <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
     </div>
   </body>
 </html>
