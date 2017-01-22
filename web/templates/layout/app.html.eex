@@ -10,20 +10,10 @@
     <![endif]-->
   </head>
   <body>
-    <header class="navbar navbar-fixed-top navbar-inverse">
-      <div class="container">
-        <%= link "sample app", to: static_path(@conn, "/#"), id: "logo" %>
-        <nav>
-          <ul class="nav navbar-nav navbar-right">
-            <li><%= link "Home", to: static_path(@conn, "/#") %></li>
-            <li><%= link "Help", to: static_path(@conn, "/#") %></li>
-            <li><%= link "Log in", to: static_path(@conn, "/#") %></li>
-          </ul>
-        </nav>
-      </div>
-    </header>
+    <%= render "_header.html", assigns %>
     <div class="container">
       <%= render @view_module, @view_template, assigns %>
+      <%= render "_footer.html", assigns %>
       <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
     </div>
   </body>
