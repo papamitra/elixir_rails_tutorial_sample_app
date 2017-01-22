@@ -1,12 +1,28 @@
+
 <!DOCTYPE html>
 <html>
   <head>
     <title><%= full_title(@title) %></title>
-    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+    <!--[if lt IE 9]>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js">
+      </script>
+    <![endif]-->
   </head>
-
   <body>
-    <%= render @view_module, @view_template, assigns %>
-    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+    <header class="navbar navbar-fixed-top navbar-inverse">
+      <div class="container">
+        <%= link "sample app", to: static_path(@conn, "/#"), id: "logo" %>
+        <nav>
+          <ul class="nav navbar-nav navbar-right">
+            <li><%= link "Home", to: static_path(@conn, "/#") %></li>
+            <li><%= link "Help", to: static_path(@conn, "/#") %></li>
+            <li><%= link "Log in", to: static_path(@conn, "/#") %></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <div class="container">
+      <%= render @view_module, @view_template, assigns %>
+    </div>
   </body>
 </html>
