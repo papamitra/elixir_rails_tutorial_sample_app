@@ -20,6 +20,7 @@ defmodule SampleApp.Router do
     get "/static_pages/home", StaticPagesController, :home
     get "/static_pages/help", StaticPagesController, :help
     get "/static_pages/about", StaticPagesController, :about
+    get "/static_pages/contact", StaticPagesController, :contact
   end
 
   # Other scopes may use custom stacks.

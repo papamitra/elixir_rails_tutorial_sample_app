@@ -26,4 +26,11 @@ defmodule SampleApp.StaticPagesControllerTest do
     conn = get conn, static_pages_path(conn, :about)
     assert "About | #{@base_title}" == get_title(conn)
   end
+
+  test "should get contact" do
+    conn = build_conn()
+    conn = get conn, static_pages_path(conn, :contact)
+    assert "Contact | #{@base_title}" == get_title(conn)
+  end
+
 end

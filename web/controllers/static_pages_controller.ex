@@ -13,4 +13,8 @@ defmodule SampleApp.StaticPagesController do
     render conn, "about.html", title: "About"
   end
 
+  def contact(conn, _params) do
+    render conn, "contact.html", title: "Contact"
+  end
+
 end
