@@ -1,10 +1,10 @@
 <header class="navbar navbar-fixed-top navbar-inverse">
   <div class="container">
-    <%= link "sample app", to: "/#", id: "logo" %>
+    <%= link "sample app", to: root_path(@conn, :home), id: "logo" %>
     <nav>
       <ul class="nav navbar-nav navbar-right">
-        <li><%= link "Home", to: "/#" %></li>
-        <li><%= link "Help", to: "/#" %></li>
+        <li><%= link "Home", to: root_path(@conn, :home) %></li>
+        <li><%= link "Help", to: static_pages_path(@conn, :help) %></li>
         <li><%= link "Log in", to: "/#" %></li>
       </ul>
     </nav>

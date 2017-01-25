@@ -7,8 +7,8 @@ defmodule SampleApp.StaticPagesControllerTest do
     Floki.find(html_response(conn, 200), "title") |> Enum.at(0) |> elem(2) |> Enum.at(0)
   end
 
-  test "should get root" do
-    conn = get build_conn(), "/"
+  test "should get root", %{conn: conn} do
+    conn = get conn, root_path(conn, :home)
     assert "#{@base_title}" == get_title(conn)
   end
 
