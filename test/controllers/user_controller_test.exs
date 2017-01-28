@@ -6,7 +6,7 @@ defmodule SampleApp.UserControllerTest do
   @invalid_attrs %{}
 
   test "should get new", %{conn: conn} do
-    conn = get conn, user_path(conn, :new)
+    conn = get conn, signup_path(conn, :new)
     assert html_response(conn, 200)
   end
 end

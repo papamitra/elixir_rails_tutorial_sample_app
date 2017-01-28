@@ -7,7 +7,7 @@
     sample application.
   </h2>
 
-  <%= link "Sign up now!", to: static_path(@conn, "/#"), class: "btn btn-lg btn-primary" %>
+  <%= link "Sign up now!", to: signup_path(@conn, :new), class: "btn btn-lg btn-primary" %>
 </div>
 
 <%= link img_tag("/images/rails.png", alt: "Rails logo"), to: "http://rubyonrails.org/" %>
