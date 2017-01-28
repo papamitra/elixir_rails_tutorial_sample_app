@@ -3,19 +3,6 @@ defmodule SampleApp.UserTest do
 
   alias SampleApp.User
 
-  @valid_attrs %{email: "some content", name: "some content"}
-  @invalid_attrs %{}
-
-  test "changeset with valid attributes" do
-    changeset = User.changeset(%User{}, @valid_attrs)
-    assert changeset.valid?
-  end
-
-  test "changeset with invalid attributes" do
-    changeset = User.changeset(%User{}, @invalid_attrs)
-    refute changeset.valid?
-  end
-
   test "name should be present" do
     changeset = User.changeset(%User{}, %{name: "     ", email: "user@example.com"})
     refute changeset.valid?
@@ -34,6 +21,24 @@ defmodule SampleApp.UserTest do
   test "email should bnot be too long" do
     changeset = User.changeset(%User{}, %{name: "Example User", email: String.duplicate("a", 244) <> "@example.com"})
     refute changeset.valid?
+  end
+
+  test "email validation should accept valid address" do
+    valid_addresses = ~w[user@example.com USER@foo.COM A_US-ER@foo.bar.org first.last@foo.jp alice+bob@baz.cn]
+
+    Enum.each valid_addresses, fn valid_address ->
+      changeset = User.changeset(%User{}, %{name: "Example User", email: valid_address})
+      assert changeset.valid?
+    end
+  end
+
+  test "email validation should reject invalid addresses" do
+    invalid_addresses = ~w[user@example,com user_at_foo.org user.name@example.foo@bar_baz.com foo@bar+baz.com]
+
+    Enum.each invalid_addresses, fn invalid_address ->
+      changeset = User.changeset(%User{}, %{name: "Example User", email: invalid_address})
+      refute changeset.valid?
+    end
   end
 
 end
