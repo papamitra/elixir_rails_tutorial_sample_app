@@ -25,4 +25,15 @@ defmodule SampleApp.UserTest do
     changeset = User.changeset(%User{}, %{name: "Example User", email: "     "})
     refute changeset.valid?
   end
+
+  test "name should not be too long" do
+    changeset = User.changeset(%User{}, %{name: String.duplicate("a", 51), email: "user@example.com"})
+    refute changeset.valid?
+  end
+
+  test "email should bnot be too long" do
+    changeset = User.changeset(%User{}, %{name: "Example User", email: String.duplicate("a", 244) <> "@example.com"})
+    refute changeset.valid?
+  end
+
 end

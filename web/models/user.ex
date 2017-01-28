@@ -15,5 +15,7 @@ defmodule SampleApp.User do
     struct
     |> cast(params, [:name, :email])
     |> validate_required([:name, :email])
+    |> validate_length(:name, max: 50)
+    |> validate_length(:email, max: 255)
   end
 end
