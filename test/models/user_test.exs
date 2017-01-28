@@ -15,4 +15,14 @@ defmodule SampleApp.UserTest do
     changeset = User.changeset(%User{}, @invalid_attrs)
     refute changeset.valid?
   end
+
+  test "name should be present" do
+    changeset = User.changeset(%User{}, %{name: "     ", email: "user@example.com"})
+    refute changeset.valid?
+  end
+
+  test "email should be present" do
+    changeset = User.changeset(%User{}, %{name: "Example User", email: "     "})
+    refute changeset.valid?
+  end
 end
