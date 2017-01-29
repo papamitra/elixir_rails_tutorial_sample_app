@@ -32,6 +32,7 @@ defmodule SampleApp.User do
     struct
     |> cast(params, [:password, :password_confirmation])
     |> validate_required([:password, :password_confirmation])
+    |> validate_length(:password, min: 6)
     |> put_pass_digest
   end
 

@@ -4,7 +4,7 @@ defmodule SampleApp.UserTest do
   alias SampleApp.User
   alias SampleApp.Repo
 
-  @user %{name: "Example User", email: "user@example.com", password: "hoge", password_confirmation: "hoge"}
+  @user %{name: "Example User", email: "user@example.com", password: "foobar", password_confirmation: "foobar"}
 
   setup do
     changeset = User.changeset(%User{}, @user)
@@ -60,4 +60,17 @@ defmodule SampleApp.UserTest do
     dup = User.changeset(%User{}, attrs)
     assert {:error, dup} = Repo.insert(dup)
   end
+
+  test "password should be present (nonblank)" do
+    pass = String.duplicate(" ", 6)
+    changeset = create_changeset %{password: pass, password_confirmation: pass}
+    refute changeset.valid?
+  end
+
+  test "password shoudl have a minimum length" do
+    pass = String.duplicate("a", 5)
+    changeset = create_changeset %{password: pass, password_confirmation: pass}
+    refute changeset.valid?
+  end
+
 end
