@@ -2,6 +2,15 @@ defmodule SampleApp.UserTest do
   use SampleApp.ModelCase
 
   alias SampleApp.User
+  alias SampleApp.Repo
+
+  @user %{name: "Example User", email: "user@example.com"}
+
+  setup do
+    changeset = User.changeset(%User{}, @user)
+    Repo.insert(changeset)
+    :ok
+  end
 
   test "name should be present" do
     changeset = User.changeset(%User{}, %{name: "     ", email: "user@example.com"})
@@ -41,4 +50,9 @@ defmodule SampleApp.UserTest do
     end
   end
 
+  test "email addresses should be unique" do
+    attrs = Map.put(@user, :email, @user[:email] |> String.upcase)
+    dup = User.changeset(%User{}, attrs)
+    assert {:error, dup} = Repo.insert(dup)
+  end
 end
