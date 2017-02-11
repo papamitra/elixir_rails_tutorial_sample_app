@@ -1,0 +1,3 @@
+<div class="debug_dump">
+  <%= @debug_dump %>
+</div>
