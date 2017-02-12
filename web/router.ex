@@ -23,7 +23,7 @@ defmodule SampleApp.Router do
     get "/contact", StaticPagesController, :contact
 
     get "/signup", UserController, :new, as: :signup
-    resources "users", UserController, only: [:show]
+    resources "/users", UserController, only: [:show, :create]
   end
 
   # Other scopes may use custom stacks.
