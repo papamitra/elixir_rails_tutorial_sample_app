@@ -13,4 +13,17 @@ defmodule SampleApp.UserController do
     render conn, "show.html", title: "", user: user
   end
 
+  def create(conn, %{"user" => user_params}) do
+    changeset = User.changeset(%User{}, user_params)
+    case Repo.insert(changeset) do
+      {:ok, user} ->
+        conn
+        |> put_flash(:info, "#{user.name} created!")
+        |> redirect(to: user_path(conn, :index))
+      {:error, changeset} ->
+        render(conn, "new.html", changeset: changeset, title: "")
+    end
+
+  end
+
 end

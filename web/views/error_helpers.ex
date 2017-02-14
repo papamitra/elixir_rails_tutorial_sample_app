@@ -14,6 +14,19 @@ defmodule SampleApp.ErrorHelpers do
     end
   end
 
+  def error_explanation(form, field) do
+    if error = form.errors[field] do
+      content_tag :li, humanize(field) <> " " <> translate_error(error)
+    end
+  end
+
+  def with_errors(content, form, field) do
+    case form.errors[field] do
+      {msg, opts} -> content_tag(:div, content, class: "field_with_errors")
+      _ -> content
+    end
+  end
+
   @doc """
   Translates an error message using gettext.
   """
