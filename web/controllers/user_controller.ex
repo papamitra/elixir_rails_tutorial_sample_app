@@ -19,7 +19,7 @@ defmodule SampleApp.UserController do
       {:ok, user} ->
         conn
         |> put_flash(:info, "#{user.name} created!")
-        |> redirect(to: user_path(conn, :index))
+        |> redirect(to: user_path(conn, :show, user.id))
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset, title: "")
     end
