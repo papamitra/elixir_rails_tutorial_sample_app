@@ -12,6 +12,14 @@ defmodule SampleApp.UsersSignupTest do
     end
   end
 
+  defmacro assert_difference(expr, expect, do: block) do
+    quote do
+      pval = unquote(expr)
+      unquote(block)
+      assert (unquote(expr) - pval) == unquote(expect)
+    end
+  end
+
   def assert_template(conn, template) do
     assert conn.private.phoenix_template == template
   end
@@ -23,9 +31,20 @@ defmodule SampleApp.UsersSignupTest do
       conn = post conn, "/users", %{"user" => %{"name" => "",
                                                  "email" => "user@invalid",
                                                  "password" => "foo",
-                                                 "passwork_confirmation" => "bar"}}
+                                                 "password_confirmation" => "bar"}}
     end
 
     assert_template conn, "new.html"
+  end
+
+  test "valid signup information" do
+    conn = build_conn()
+    assert_difference Repo.aggregate(User, :count, :id), 1 do
+      conn = post conn, "/users", %{"user" => %{"name" => "Example User",
+                                                 "email" => "user@example.com",
+                                                 "password" => "password",
+                                                 "password_confirmation" => "password"}}
+    end
+    assert redirected_to(conn) =~ ~r|users/\d+|
   end
 end
